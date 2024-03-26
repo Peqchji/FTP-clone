@@ -7,7 +7,7 @@ class SocketRepository(SocketAbstract):
     def send():
         pass
     
-    def revceive():
+    def receive():
         pass
     
     def connect():
