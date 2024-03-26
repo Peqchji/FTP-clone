@@ -15,5 +15,5 @@ class SocketAbstract(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def close():
+    def disconnect():
         raise NotImplementedError

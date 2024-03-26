@@ -1,5 +1,5 @@
 from app import App
-from usecase.FTP_usercase import FTPUsercase
+from usecase.FTP_usecase import FTPUsercase
 
 if __name__ == "__main__":
     FTP_usecase = FTPUsercase()
