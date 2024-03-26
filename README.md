@@ -1,5 +1,5 @@
 ## FTP-clone
-a python FTP client program 
+a FTP client python program 
 # including command
 - ascii
 - binary
