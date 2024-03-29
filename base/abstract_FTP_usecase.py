@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class FTPUsecaseAbstract(ABC):
+class AbstractFTPUsecase(ABC):
     
     @abstractmethod
     def ascii():

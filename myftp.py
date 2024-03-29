@@ -1,9 +1,10 @@
 from app import App
 from usecase.FTP_usecase import FTPUsercase
+from adapter.socket_adapter import SocketAdapter
 
 if __name__ == "__main__":
-    FTP_usecase = FTPUsercase()
+    socket = SocketAdapter()
+    FTP_usecase = FTPUsercase(socket)
+    
     app = App.build(FTP_usecase)
-    app_2 = App.build(FTP_usecase)
-    print(app._ftp_usecase)
     app.run()

@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 
-class SocketAbstract(ABC):
+class AbstractSocket(ABC):
     
     @abstractmethod
     def send():
         raise NotImplementedError
     
     @abstractmethod
-    def revceive():
+    def receive():
         raise NotImplementedError
     
     @abstractmethod
@@ -15,5 +15,5 @@ class SocketAbstract(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def disconnect():
+    def close():
         raise NotImplementedError

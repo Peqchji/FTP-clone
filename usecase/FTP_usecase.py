@@ -1,10 +1,12 @@
-from base.FTP_usecase_abstract import FTPUsecaseAbstract
-from base.socket_abstract import SocketAbstract
+from base.abstract_FTP_usecase import AbstractFTPUsecase
+from base.abstract_socket import AbstractSocket
 
-class FTPUsercase():
-    __socket: SocketAbstract = None
+from usecase.FTP import *
+
+class FTPUsercase(AbstractFTPUsecase):
+    __socket: AbstractSocket = None
     
-    def __init__(self, socket: SocketAbstract = None):
+    def __init__(self, socket: AbstractSocket = None):
         self.__socket = socket
     
     def ascii():
@@ -13,20 +15,20 @@ class FTPUsercase():
     def binary():
         pass
 
-    def bye():
-        pass
+    def bye(self):
+        return quit.do_quit(self.__socket)
 
     def cd():
         pass
 
-    def close():
-        pass
+    def close(self):
+        return close.do_close(self.__socket)
 
     def delete():
         pass
 
-    def disconnect():
-        pass
+    def disconnect(self):
+        return close.do_close(self.__socket)
 
     def get():
         pass
@@ -34,8 +36,11 @@ class FTPUsercase():
     def ls():
         pass
     
-    def open():
-        pass
+    def open(self, server_ip, server_port = 21):
+        return open.do_open(self.__socket, server_ip, server_port)
+    
+    def is_connected(self):
+        return self.__socket.is_connected()
     
     def put():
         pass
@@ -43,8 +48,8 @@ class FTPUsercase():
     def pwd():
         pass
     
-    def quit():
-        pass
+    def quit(self):
+        return quit.do_quit(self.__socket)
     
     def rename():
         pass
