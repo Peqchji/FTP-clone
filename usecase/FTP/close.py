@@ -5,10 +5,9 @@ def do_close(socket: AbstractSocket):
         if not socket.is_connected():
             print("Not connected.")
             return -1
-        
         socket.send("QUIT\r\n")
         print(socket.receive(), end="")
         socket.close()
         return 0
     except Exception as e:
-        print(e.__str__())
+        socket.close()

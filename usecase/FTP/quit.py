@@ -8,4 +8,4 @@ def do_quit(socket: AbstractSocket):
             socket.close()
         return 0
     except Exception as e:
-            print(e.__str__())
+        socket.close()

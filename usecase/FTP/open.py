@@ -14,13 +14,17 @@ def do_open(socket: AbstractSocket, server_ip, server_port = 21):
         res = socket.receive()
         print(res, end="")
         
-        if (res.startswith("501")):
+        if (res.startswith("5")):
             print("Login failed.")
             return -1
         
         password = getpass.getpass("Password: ")
         socket.send(f"PASS {password}\r\n")
-        print(socket.receive(), end="")
+        res = socket.receive()
+        print(res, end="")
+        
+        if (res.startswith("5")):
+            print("Login failed.")
         
         return 0
     except Exception as e:

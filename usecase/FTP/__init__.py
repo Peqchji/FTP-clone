@@ -2,5 +2,7 @@ __all__ = [
     "open", 
     "close", 
     "quit", 
-    "transfer_type"
+    "transfer_type",
+    "user", 
+    "list"
 ]
