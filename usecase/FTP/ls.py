@@ -32,14 +32,15 @@ def do_ls(socket: AbstractSocket, is_Ls=False, data_port=20):
             return -1
         
         if res.startswith("1"):
-            start = time.time()
+            start = time.time_ns()
             data = socket.receive_data(data_socket)
             print(data, end="")
         
         print(socket.receive(4096), end="")
         if res.startswith("1"):
-            end = time.time()
+            end = time.time_ns()
             time_diff = end - start
+            print(time_diff)
             print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
         
         return 0

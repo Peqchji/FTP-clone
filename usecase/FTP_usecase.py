@@ -35,7 +35,7 @@ class FTPUsercase(AbstractFTPUsecase):
         pass
 
     def ls(self, is_Ls, data_port):
-        return list.do_ls(self.__socket, is_Ls, data_port)
+        return ls.do_ls(self.__socket, is_Ls, data_port)
 
     def open(self, server_ip, server_port=21):
         return open.do_open(self.__socket, server_ip, server_port)
