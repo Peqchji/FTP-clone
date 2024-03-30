@@ -9,11 +9,11 @@ class FTPUsercase(AbstractFTPUsecase):
     def __init__(self, socket: AbstractSocket = None):
         self.__socket = socket
     
-    def ascii():
-        pass
+    def ascii(self):
+        return transfer_type.set_type(self.__socket, "A")
 
-    def binary():
-        pass
+    def binary(self):
+        return transfer_type.set_type(self.__socket, "I")
 
     def bye(self):
         return quit.do_quit(self.__socket)
@@ -39,9 +39,6 @@ class FTPUsercase(AbstractFTPUsecase):
     def open(self, server_ip, server_port = 21):
         return open.do_open(self.__socket, server_ip, server_port)
     
-    def is_connected(self):
-        return self.__socket.is_connected()
-    
     def put():
         pass
     
@@ -56,3 +53,6 @@ class FTPUsercase(AbstractFTPUsecase):
     
     def user():
         pass
+    
+    def is_connected(self):
+        return self.__socket.is_connected()

@@ -58,7 +58,15 @@ class App:
                 self.__ftp_usecase.bye()
                 print()
                 break
-                
+            
+            elif (cmd == "ascii"):
+                self.__ftp_usecase.ascii()
+                continue
+            
+            elif (cmd == "binary"):
+                self.__ftp_usecase.binary()
+                continue
+            
             elif (cmd in ["a"]):
                 print("Ambiguous command.")
             

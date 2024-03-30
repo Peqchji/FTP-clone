@@ -17,7 +17,7 @@ class SocketAdapter(AbstractSocket):
         try:
             res = self.client_socket.recv(recieve)
             return res.decode()
-        except ConnectionAbortedError or ConnectionResetError or C:
+        except ConnectionAbortedError or ConnectionResetError:
             raise Exception("Connection closed by remote host.")
     
     def connect(self, IP, port):
