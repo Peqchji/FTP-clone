@@ -19,8 +19,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def bye(self):
         return quit.do_quit(self.__socket)
 
-    def cd():
-        pass
+    def cd(self, change_to: str):
+        return change_dir.do_cd(self.__socket, change_to)
 
     def close(self):
         return close.do_close(self.__socket)
@@ -34,8 +34,14 @@ class FTPUsercase(AbstractFTPUsecase):
     def get():
         pass
 
-    def ls(self, is_Ls, data_port):
-        return ls.do_ls(self.__socket, is_Ls, data_port)
+    def ls(self, is_Ls, log_to, remote_dir, data_port):
+        return ls.do_ls(
+            self.__socket, 
+            log_to, 
+            remote_dir, 
+            is_Ls, 
+            data_port
+        )
 
     def open(self, server_ip, server_port=21):
         return open.do_open(self.__socket, server_ip, server_port)

@@ -4,5 +4,6 @@ __all__ = [
     "quit", 
     "transfer_type",
     "user", 
-    "ls"
+    "ls",
+    "change_dir"
 ]

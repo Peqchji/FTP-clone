@@ -98,11 +98,43 @@ class App:
                 continue
 
             elif (cmd == "ls"):
+                write_to = ""
                 is_Ls = False
                 if inp[0].startswith("L"):
                     is_Ls = True
-                self.__ftp_usecase.ls(is_Ls,14148)
+
+                if len(inp) == 1:
+                    remote_dir = "."
+                elif len(inp) == 2:
+                    remote_dir = inp[1]
+                elif len(inp) == 3:
+                    remote_dir = inp[1]
+                    write_to = inp[2]
+                else:
+                    print("Usage: ls remote directory local file.")
+                    continue
+
+                self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, 14148)
                 continue
+
+            elif (cmd == "cd"):
+                change_to = "."
+                is_connected = self.__ftp_usecase.is_connected()
+                if (not is_connected):
+                    print("Not connected.")
+                    continue
+
+                if len(inp) == 1:
+                    change_to = input("Remote directory ")
+                    if change_to == "":
+                        print("cd remote directory.")
+                        continue
+                else:
+                    change_to = inp[1]
+
+                self.__ftp_usecase.cd(change_to)
+                continue
+
             elif (cmd in ["a"]):
                 print("Ambiguous command.")
 

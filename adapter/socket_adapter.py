@@ -1,6 +1,5 @@
 import socket
 from base.abstract_socket import AbstractSocket
-import sys
 
 class SocketAdapter(AbstractSocket):
     client_socket = None
