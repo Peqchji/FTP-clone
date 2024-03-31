@@ -3,7 +3,7 @@ from utils import ip_comma
 import time
 import os
 
-def do_ls(socket: AbstractSocket, log_to: str, remote_dir: str, is_Ls=False, data_port=20):
+def do_get(socket: AbstractSocket, to_path: str, remote_file: str, data_port=20):
     try:
         if (not socket.is_connected()):
             print("Not connected.")
@@ -23,20 +23,17 @@ def do_ls(socket: AbstractSocket, log_to: str, remote_dir: str, is_Ls=False, dat
             socket.close(data_socket)
             return -1
         
-        new_file = log_to.split("/")[-1]
-        to_dir = log_to.removesuffix(new_file)
+        new_file = to_path.split("/")[-1]
+        to_dir = to_path.removesuffix(new_file)
         write_to = os.path.join(os.getcwd(), to_dir)
+        print(new_file, to_dir, write_to, os.path.isdir(write_to))
         
-        if log_to != "" and not os.path.isdir(write_to):
-            print(f"Error opening local file {to_dir}.")
+        if to_path != "" and not os.path.isdir(write_to):
+            print(f"> R:No such process")
             socket.close(data_socket)
-            raise Exception(f"> {to_dir[0]}:No Such file or directory")
+            return -1
         
-        if (is_Ls):
-            socket.send(f"LIST {remote_dir}\r\n")
-        else:
-            socket.send(f"NLST {remote_dir}\r\n")
-        
+        socket.send(f"RETR {remote_file}\r\n")
         res = socket.receive()
         print(res, end="")
         if (res.startswith("5")):
@@ -54,7 +51,7 @@ def do_ls(socket: AbstractSocket, log_to: str, remote_dir: str, is_Ls=False, dat
             time_diff = (end - start) + 1e-10
             print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
             
-            if (log_to != ""):
+            if (to_path != ""):
                 with open(os.path.join(write_to, new_file), 'w+') as file:
                     file.write(data)
                     file.seek(0)

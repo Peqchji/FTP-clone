@@ -20,6 +20,9 @@ class App:
         return cls._instance
 
     def run(self):
+        server_data_port = 14148 # change to server FTP data port
+        server_host = ""
+        
         while True:
             inp = str(input("ftp> ")).strip().split(" ")
             cmd = inp[0].lower()
@@ -48,7 +51,8 @@ class App:
                     if (len(inp) == 3):
                         port = int(inp[2])
 
-                self.__ftp_usecase.open(ip, port)
+                peername = self.__ftp_usecase.open(ip, port)
+                server_host = peername[0]
                 continue
             elif (cmd == "user"):
                 username = ""
@@ -108,7 +112,22 @@ class App:
                     print("Usage: ls remote directory local file.")
                     continue
 
-                self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, 14148)
+                self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, server_data_port)
+                continue
+            elif (cmd == "get"):
+                write_to = ""
+                if len(inp) == 1:
+                    remote_file = input("Remote file get [ local-file ]. ").split(" ")[0]
+                elif len(inp) == 2:
+                    remote_file  = inp[1]
+                elif len(inp) == 3:
+                    remote_file  = inp[1]
+                    write_to = inp[2]
+                else:
+                    print("Usage: ls remote directory local file.")
+                    continue
+
+                self.__ftp_usecase.get(write_to, remote_file, server_data_port)
                 continue
             elif (cmd == "cd"):
                 change_to = "."

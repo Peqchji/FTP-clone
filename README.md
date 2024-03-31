@@ -19,12 +19,12 @@ This Python program is a simple FTP (File Transfer Protocol) client that allows 
 - 🟢ascii
 - 🟢binary
 - 🟢bye
-- 🔴cd
+- 🟢cd
 - 🟢close
 - 🟢delete
 - 🟢disconnect
-- 🟢get
-- 🟡ls
+- 🟡get
+- 🟢ls
 - 🟢open
 - 🔴put
 - 🟢pwd

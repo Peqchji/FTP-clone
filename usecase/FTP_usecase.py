@@ -31,8 +31,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def disconnect(self):
         return close.do_close(self.__socket)
 
-    def get():
-        pass
+    def get(self, to_path, remote_file, data_port):
+        return get.do_get(self.__socket, to_path, remote_file, data_port)
 
     def ls(self, is_Ls, log_to, remote_dir, data_port):
         return ls.do_ls(

@@ -8,5 +8,6 @@ __all__ = [
     "change_dir",
     "delete", 
     "pwd",
-    "rename"
+    "rename",
+    "get"
 ]

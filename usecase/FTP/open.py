@@ -26,6 +26,6 @@ def do_open(socket: AbstractSocket, server_ip, server_port = 21):
         if (res.startswith("5")):
             print("Login failed.")
         
-        return 0
+        return socket.get_peername()
     except Exception as e:
         print(e.__str__())
