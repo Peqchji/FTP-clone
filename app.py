@@ -50,7 +50,6 @@ class App:
 
                 self.__ftp_usecase.open(ip, port)
                 continue
-
             elif (cmd == "user"):
                 username = ""
                 password = ""
@@ -79,24 +78,19 @@ class App:
 
                 self.__ftp_usecase.user(username, password)
                 continue
-
             elif (cmd == "disconnect" or cmd == "close"):
                 self.__ftp_usecase.disconnect()
                 continue
-
             elif (cmd == "bye" or cmd == "quit"):
                 self.__ftp_usecase.bye()
                 print()
                 break
-
             elif (cmd == "ascii"):
                 self.__ftp_usecase.ascii()
                 continue
-
             elif (cmd == "binary"):
                 self.__ftp_usecase.binary()
                 continue
-
             elif (cmd == "ls"):
                 write_to = ""
                 is_Ls = False
@@ -116,7 +110,6 @@ class App:
 
                 self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, 14148)
                 continue
-
             elif (cmd == "cd"):
                 change_to = "."
                 is_connected = self.__ftp_usecase.is_connected()
@@ -125,7 +118,7 @@ class App:
                     continue
 
                 if len(inp) == 1:
-                    change_to = input("Remote directory ")
+                    change_to = input("Remote directory ").split(" ")[0]
                     if change_to == "":
                         print("cd remote directory.")
                         continue
@@ -133,8 +126,7 @@ class App:
                     change_to = inp[1]
 
                 self.__ftp_usecase.cd(change_to)
-                continue
-            
+                continue            
             elif (cmd == "delete"):
                 is_connected = self.__ftp_usecase.is_connected()
                 if (not is_connected):
@@ -142,7 +134,7 @@ class App:
                     continue
 
                 if len(inp) == 1:
-                    filename = input("Remote file ")
+                    filename = input("Remote file ").split(" ")[0]
                     if filename == "":
                         print("delete remote file.")
                         continue
@@ -150,18 +142,43 @@ class App:
                     filename = inp[1]
 
                 self.__ftp_usecase.delete(filename)
-                continue
-            
+                continue            
             elif (cmd == "pwd"):
                 self.__ftp_usecase.pwd()
-                continue
+                continue            
+            elif (cmd == "rename"):
+                from_name = ""
+                to_name = ""
+                is_connected = self.__ftp_usecase.is_connected()
+                if (not is_connected):
+                    print("Not connected.")
+                    continue
 
+                if len(inp) == 1:
+                    from_name = input("From name ").split(" ")[0]
+                    if from_name == "":
+                        print("rename from-name to-name.")
+                        continue
+                
+                if len(inp) in [1, 2]:    
+                    to_name = input("To name ").split(" ")[0]
+                    if to_name == "":
+                        print("rename from-name to-name.")
+                        continue
+                
+                if len(inp) in [2, 3]:
+                    from_name = inp[1]
+
+                if len(inp) == 3:
+                    to_name = inp[2]
+                    
+
+                self.__ftp_usecase.rename(from_name, to_name)
+                continue
             elif (cmd in ["a"]):
                 print("Ambiguous command.")
-
             elif (cmd == ""):
                 continue
-
             else:
                 print("Invalid command.")
 

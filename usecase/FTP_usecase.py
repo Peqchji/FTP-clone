@@ -55,8 +55,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def quit(self):
         return quit.do_quit(self.__socket)
 
-    def rename():
-        pass
+    def rename(self, from_name, to_name):
+        return rename.do_rename(self.__socket, from_name, to_name)
 
     def user(self, username, password):
         return user.do_user(self.__socket, username, password)

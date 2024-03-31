@@ -7,5 +7,6 @@ __all__ = [
     "ls",
     "change_dir",
     "delete", 
-    "pwd"
+    "pwd",
+    "rename"
 ]

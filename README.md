@@ -16,18 +16,18 @@ This Python program is a simple FTP (File Transfer Protocol) client that allows 
 - `socket` module (built-in in Python)
 
 # including command
-- ascii
-- binary
-- bye
-- cd
-- close
-- delete
-- disconnect
-- get
-- ls
-- open
-- put
-- pwd
-- quit
-- rename
-- user
+- 🟢ascii
+- 🟢binary
+- 🟢bye
+- 🔴cd
+- 🟢close
+- 🟢delete
+- 🟢disconnect
+- 🟢get
+- 🟡ls
+- 🟢open
+- 🔴put
+- 🟢pwd
+- 🟢quit
+- 🟢rename
+- 🟢user
