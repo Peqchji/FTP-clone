@@ -65,7 +65,6 @@ class SocketAdapter(AbstractSocket):
     def close(self, socket=None):
         try:
             if socket is not None:
-                socket = self.client_socket
                 socket.close()
             else:
                 self.client_socket.close()

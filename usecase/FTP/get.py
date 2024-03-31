@@ -26,24 +26,22 @@ def do_get(socket: AbstractSocket, to_path: str, remote_file: str, data_port=20)
         new_file = to_path.split("/")[-1]
         to_dir = to_path.removesuffix(new_file)
         write_to = os.path.join(os.getcwd(), to_dir)
-        print(new_file, to_dir, write_to, os.path.isdir(write_to))
-        
-        if to_path != "" and not os.path.isdir(write_to):
-            print(f"> R:No such process")
-            socket.close(data_socket)
-            return -1
         
         socket.send(f"RETR {remote_file}\r\n")
         res = socket.receive()
-        print(res, end="")
+        print(res.rstrip("\r\n"), end="\r\n")
+        
         if (res.startswith("5")):
             socket.close(data_socket)
             return -1
         
+        if to_path != "" and not os.path.isdir(write_to):
+            print(f"> R:No such process")
+            to_path = ""
+        
         if (res.startswith("1")):
             start = float(time.time())
             data = socket.receive_data(data_socket)
-            print(data, end="")
         
         print(socket.receive(4096), end="")
         if (res.startswith("1")):
@@ -59,4 +57,4 @@ def do_get(socket: AbstractSocket, to_path: str, remote_file: str, data_port=20)
         
         return 0
     except Exception as e:
-        print(e.__str__())
+        raise e

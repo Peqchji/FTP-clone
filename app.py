@@ -117,16 +117,20 @@ class App:
             elif (cmd == "get"):
                 write_to = ""
                 if len(inp) == 1:
-                    remote_file = input("Remote file get [ local-file ]. ").split(" ")[0]
+                    remote_file = input("Remote file ").split(" ")[0]
+                    if remote_file == "":
+                        print("Remote file get [ local-file ].")
+                        continue
+                    write_to = input("Local file ").split(" ")[0]
                 elif len(inp) == 2:
                     remote_file  = inp[1]
-                elif len(inp) == 3:
+                elif len(inp) >= 3:
                     remote_file  = inp[1]
                     write_to = inp[2]
-                else:
-                    print("Usage: ls remote directory local file.")
-                    continue
-
+                
+                if write_to == "":
+                        write_to = remote_file
+                
                 self.__ftp_usecase.get(write_to, remote_file, server_data_port)
                 continue
             elif (cmd == "cd"):
