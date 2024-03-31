@@ -134,6 +134,27 @@ class App:
 
                 self.__ftp_usecase.cd(change_to)
                 continue
+            
+            elif (cmd == "delete"):
+                is_connected = self.__ftp_usecase.is_connected()
+                if (not is_connected):
+                    print("Not connected.")
+                    continue
+
+                if len(inp) == 1:
+                    filename = input("Remote file ")
+                    if filename == "":
+                        print("delete remote file.")
+                        continue
+                else:
+                    filename = inp[1]
+
+                self.__ftp_usecase.delete(filename)
+                continue
+            
+            elif (cmd == "pwd"):
+                self.__ftp_usecase.pwd()
+                continue
 
             elif (cmd in ["a"]):
                 print("Ambiguous command.")

@@ -13,6 +13,7 @@ class SocketAdapter(AbstractSocket):
             socket.send(stream)
             return 0
         except ConnectionAbortedError or ConnectionResetError:
+            self.close()
             raise Exception("Connection closed by remote host.")
 
     def receive(self, recieve: int = 1024, socket=None):
@@ -23,6 +24,7 @@ class SocketAdapter(AbstractSocket):
             res = socket.recv(recieve)
             return res.decode()
         except ConnectionAbortedError or ConnectionResetError:
+            self.close()
             raise Exception("Connection closed by remote host.")
 
     def connect(self, IP, port):
@@ -32,6 +34,7 @@ class SocketAdapter(AbstractSocket):
             self.client_socket.connect((IP, port))
             return 0
         except ConnectionRefusedError:
+            self.close()
             raise Exception("> ftp: connect :Connection refused")
 
     def open(self, to_port=20):
@@ -87,6 +90,7 @@ class SocketAdapter(AbstractSocket):
     def is_connected(self, socket=None):
         if socket is None:
             socket = self.client_socket
+        
         if socket is not None and socket.fileno():
             return f"Already connected to {socket.getpeername()[0]}, use disconnect first."
         return False

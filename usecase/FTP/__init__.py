@@ -5,5 +5,7 @@ __all__ = [
     "transfer_type",
     "user", 
     "ls",
-    "change_dir"
+    "change_dir",
+    "delete", 
+    "pwd"
 ]

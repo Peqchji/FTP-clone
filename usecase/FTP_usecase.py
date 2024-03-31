@@ -25,8 +25,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def close(self):
         return close.do_close(self.__socket)
 
-    def delete():
-        pass
+    def delete(self, filename):
+        return delete.do_delete(self.__socket, filename)
 
     def disconnect(self):
         return close.do_close(self.__socket)
@@ -49,8 +49,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def put():
         pass
 
-    def pwd():
-        pass
+    def pwd(self):
+        return pwd.do_pwd(self.__socket)
 
     def quit(self):
         return quit.do_quit(self.__socket)
