@@ -48,7 +48,8 @@ def do_put(socket: AbstractSocket, from_path: str = "", to_path: str = "", data_
         if (res.startswith("1")):
             end = float(time.time())
             time_diff = (end - start) + 1e-10
-            print(f"ftp: {file_size} bytes received in {time_diff:.2f}Seconds {file_size/(time_diff*1000):.2f}Kbytes/sec.")
+            if file_size:
+                print(f"ftp: {file_size} bytes received in {time_diff:.2f}Seconds {file_size/(time_diff*1000):.2f}Kbytes/sec.")
 
 
         return 0
