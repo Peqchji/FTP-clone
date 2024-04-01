@@ -221,7 +221,7 @@ class App:
 
                 self.__ftp_usecase.rename(from_name, to_name)
                 continue
-            elif (cmd in ["a"]):
+            elif (cmd in ["a", "b", "c", "d", "g"]):
                 print("Ambiguous command.")
             elif (cmd == ""):
                 continue

@@ -74,7 +74,7 @@ class SocketAdapter(AbstractSocket):
             if not read:
                 break
             
-            self.send(read, conn, False)
+            self.send(read, conn, encode=False)
             
         conn.close()
         socket.close()

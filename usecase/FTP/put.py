@@ -15,6 +15,11 @@ def do_put(socket: AbstractSocket, from_path: str = "", to_path: str = "", data_
         new_ip = new_host[0]
         new_port = new_host[1]
         host_comma = ip_comma.to_ip_comma(new_ip, new_port)
+        
+        relative_path = os.path.join(os.getcwd(), from_path)
+        if from_path != "" and not os.path.exists(relative_path):
+            print(f"{from_path}: File not found")
+            return -1
 
         socket.send(f"PORT {host_comma}\r\n")
         res = socket.receive()
@@ -22,11 +27,6 @@ def do_put(socket: AbstractSocket, from_path: str = "", to_path: str = "", data_
 
         if not res.startswith("200"):
             socket.close(data_socket)
-            return -1
-
-        relative_path = os.path.join(os.getcwd(), from_path)
-        if from_path != "" and not os.path.exists(relative_path):
-            print(f"{from_path}: File not found")
             return -1
 
         socket.send(f"STOR {to_path}\r\n")
