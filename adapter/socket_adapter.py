@@ -68,17 +68,23 @@ class SocketAdapter(AbstractSocket):
         return res
 
     def send_data(self, socket: socket.socket, file):
-        conn, _ = socket.accept()
-        while True:
-            read = file.read(4096)
-            if not read:
-                break
-            
-            self.send(read, conn, encode=False)
-            
-        conn.close()
-        socket.close()
-        return 0
+        try:
+            conn, _ = socket.accept()
+            while True:
+                read = file.read(4096)
+                if not read:
+                    break
+                
+                self.send(read, conn, encode=False)
+                
+            conn.close()
+            socket.close()
+            return 0
+        except ConnectionAbortedError or ConnectionResetError:
+            conn.close()
+            socket.close()
+            self.close()
+            raise Exception("Connection closed by remote host.")
 
     def close(self, socket=None):
         try:

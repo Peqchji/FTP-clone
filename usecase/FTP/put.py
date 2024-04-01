@@ -54,4 +54,4 @@ def do_put(socket: AbstractSocket, from_path: str = "", to_path: str = "", data_
 
         return 0
     except Exception as e:
-        raise e
+        print(e.__str__())

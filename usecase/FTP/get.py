@@ -58,4 +58,4 @@ def do_get(socket: AbstractSocket, to_path: str, remote_file: str, data_port=20)
         
         return 0
     except Exception as e:
-        raise e
+        print(e.__str__())
