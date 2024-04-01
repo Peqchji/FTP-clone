@@ -47,7 +47,8 @@ def do_get(socket: AbstractSocket, to_path: str, remote_file: str, data_port=20)
         if (res.startswith("1")):
             end = float(time.time())
             time_diff = (end - start) + 1e-10
-            print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
+            if data:
+                print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
             
             if (to_path != ""):
                 with open(os.path.join(write_to, new_file), 'w+') as file:
