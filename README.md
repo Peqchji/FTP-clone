@@ -23,10 +23,10 @@ This Python program is a simple FTP (File Transfer Protocol) client that allows 
 - 🟢close
 - 🟢delete
 - 🟢disconnect
-- 🟡get
+- 🟢get
 - 🟢ls
 - 🟢open
-- 🔴put
+- 🟢put
 - 🟢pwd
 - 🟢quit
 - 🟢rename

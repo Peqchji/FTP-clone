@@ -4,12 +4,16 @@ from base.abstract_socket import AbstractSocket
 class SocketAdapter(AbstractSocket):
     client_socket = None
 
-    def send(self, data: str, socket=None):
+    def send(self, data, socket=None, encode=True):
         try:
             if socket is None:
                 socket = self.client_socket
-
-            stream = data.encode()
+            
+            if encode:
+                stream = data.encode('utf-8')
+            else:
+                stream = data
+            
             socket.send(stream)
             return 0
         except ConnectionAbortedError or ConnectionResetError:
@@ -58,9 +62,23 @@ class SocketAdapter(AbstractSocket):
                 break
             
             res += temp
+        
         conn.close()
         socket.close()
         return res
+
+    def send_data(self, socket: socket.socket, file):
+        conn, _ = socket.accept()
+        while True:
+            read = file.read(4096)
+            if not read:
+                break
+            
+            self.send(read, conn, False)
+            
+        conn.close()
+        socket.close()
+        return 0
 
     def close(self, socket=None):
         try:

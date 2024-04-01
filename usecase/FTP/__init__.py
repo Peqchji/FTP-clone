@@ -9,5 +9,6 @@ __all__ = [
     "delete", 
     "pwd",
     "rename",
-    "get"
+    "get",
+    "put"
 ]

@@ -46,8 +46,8 @@ class FTPUsercase(AbstractFTPUsecase):
     def open(self, server_ip, server_port=21):
         return open.do_open(self.__socket, server_ip, server_port)
 
-    def put():
-        pass
+    def put(self, from_path, to_path, data_port):
+        return put.do_put(self.__socket, from_path, to_path, data_port)
 
     def pwd(self):
         return pwd.do_pwd(self.__socket)

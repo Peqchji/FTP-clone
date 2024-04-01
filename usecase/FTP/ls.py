@@ -52,7 +52,8 @@ def do_ls(socket: AbstractSocket, log_to: str, remote_dir: str, is_Ls=False, dat
         if (res.startswith("1")):
             end = float(time.time())
             time_diff = (end - start) + 1e-10
-            print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
+            if data:
+                print(f"ftp: {len(data)} bytes received in {time_diff:.2f}Seconds {len(data)/(time_diff*1000):.2f}Kbytes/sec.")
             
             if (log_to != ""):
                 with open(os.path.join(write_to, new_file), 'w+') as file:

@@ -5,6 +5,11 @@ class App:
 
     _instance = None
     __ftp_usecase: AbstractFTPUsecase = None
+    __server_data_port: int = 20
+    
+    def set_server_data_port(self, port: int = 20):
+        self.__server_data_port = port
+        return self.__server_data_port
 
     def __init__(self) -> None:
         raise RuntimeError("This is a Singleton class, use build() instead.")
@@ -20,8 +25,6 @@ class App:
         return cls._instance
 
     def run(self):
-        server_data_port = 14148 # change to server FTP data port
-        server_host = ""
         
         while True:
             inp = str(input("ftp> ")).strip().split(" ")
@@ -52,7 +55,6 @@ class App:
                         port = int(inp[2])
 
                 peername = self.__ftp_usecase.open(ip, port)
-                server_host = peername[0]
                 continue
             elif (cmd == "user"):
                 username = ""
@@ -112,7 +114,7 @@ class App:
                     print("Usage: ls remote directory local file.")
                     continue
 
-                self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, server_data_port)
+                self.__ftp_usecase.ls(is_Ls, write_to, remote_dir, self.__server_data_port)
                 continue
             elif (cmd == "get"):
                 write_to = ""
@@ -129,9 +131,30 @@ class App:
                     write_to = inp[2]
                 
                 if write_to == "":
-                        write_to = remote_file
+                    write_to = remote_file.split("/")[-1]
                 
-                self.__ftp_usecase.get(write_to, remote_file, server_data_port)
+                self.__ftp_usecase.get(write_to, remote_file, self.__server_data_port)
+                continue
+            elif (cmd == "put"):
+                from_path = ""
+                remote_file = ""
+                if len(inp) == 1:
+                    from_path = input("Local file ").split(" ")[0]
+                    if from_path == "":
+                        print("Local file put: remote file.")
+                        continue
+                    remote_file = input("Remote file ").split(" ")[0]
+                elif len(inp) == 2:
+                    from_path  = inp[1]
+                elif len(inp) >= 3:
+                    from_path  = inp[1]
+                    remote_file = inp[2]
+                
+                if remote_file == "":
+                    remote_file = from_path.split("/")[-1]
+                
+                self.__ftp_usecase.put(from_path, remote_file, self.__server_data_port)
+                continue
                 continue
             elif (cmd == "cd"):
                 change_to = "."
