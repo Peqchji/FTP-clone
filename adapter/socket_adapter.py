@@ -16,7 +16,7 @@ class SocketAdapter(AbstractSocket):
             
             socket.send(stream)
             return 0
-        except ConnectionAbortedError or ConnectionResetError:
+        except (ConnectionAbortedError, ConnectionResetError):
             self.close()
             raise Exception("Connection closed by remote host.")
 
@@ -27,7 +27,7 @@ class SocketAdapter(AbstractSocket):
 
             res = socket.recv(recieve)
             return res.decode()
-        except ConnectionAbortedError or ConnectionResetError:
+        except (ConnectionAbortedError, ConnectionResetError):
             self.close()
             raise Exception("Connection closed by remote host.")
 
@@ -37,7 +37,7 @@ class SocketAdapter(AbstractSocket):
                 socket.AF_INET, socket.SOCK_STREAM)
             self.client_socket.connect((IP, port))
             return 0
-        except ConnectionRefusedError:
+        except (ConnectionRefusedError, ConnectionAbortedError, TimeoutError):
             self.close()
             raise Exception("> ftp: connect :Connection refused")
 
@@ -80,7 +80,7 @@ class SocketAdapter(AbstractSocket):
             conn.close()
             socket.close()
             return 0
-        except ConnectionAbortedError or ConnectionResetError:
+        except (ConnectionAbortedError, ConnectionResetError):
             conn.close()
             socket.close()
             self.close()

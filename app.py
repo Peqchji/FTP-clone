@@ -36,7 +36,7 @@ class App:
                     print(is_connected)
                     continue
                 port = 21
-                if (len(inp) >= 3):
+                if (len(inp) > 3):
                     print("Usage: open host name [port]")
                     continue
 
