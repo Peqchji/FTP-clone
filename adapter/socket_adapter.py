@@ -40,6 +40,9 @@ class SocketAdapter(AbstractSocket):
         except (ConnectionRefusedError, ConnectionAbortedError, TimeoutError):
             self.close()
             raise Exception("> ftp: connect :Connection refused")
+        except socket.gaierror:
+            self.close()
+            raise Exception(f"Unknown host {IP}.")
 
     def open(self, to_port=20):
         new_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

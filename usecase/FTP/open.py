@@ -4,6 +4,7 @@ from base.abstract_socket import AbstractSocket
 def do_open(socket: AbstractSocket, server_ip, server_port = 21):
     try:
         socket.connect(server_ip, server_port)
+        print(f"Connected to {server_ip}")
         print(socket.receive(), end="")
         
         socket.send("OPTS UTF8 ON\r\n")
